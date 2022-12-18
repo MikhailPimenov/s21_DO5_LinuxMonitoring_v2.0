@@ -15,8 +15,19 @@ echo 'files_per_folder '$files_per_folder
 echo 'file_letters '$file_letters
 echo 'file_size '$file_size
 
+get_name() {
+    
+}
+
+join_into_string() {
+    local IFS=''
+    echo "$*"
+}
 
 letters=$(echo "abcdefgh" | fold -w1)
 echo $letters
-string=$(shuf -e abcdefg)
+string=$(shuf -e $letters)
 echo $string
+
+string2=$(join_into_string $string)
+echo $string2
