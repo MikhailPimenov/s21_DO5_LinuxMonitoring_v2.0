@@ -1,33 +1,25 @@
-#!bin/bash
+#!/bin/bash/
 
-path=$1
-number_of_subfolders=$2
-folder_letters=$3
-files_per_folder=$4
-file_letters=$5
-file_size=$6
+. ./check_input
+. ./check_empty_space
+. ./create_folders
+. ./create_files
+
+check_input $@
 
 
-echo 'path '$path
-echo 'number_of_subfolders '$number_of_subfolders
-echo 'folder_letters '$folder_letters
-echo 'files_per_folder '$files_per_folder
-echo 'file_letters '$file_letters
-echo 'file_size '$file_size
+free_space=$(check_empty_space)
+if [[ $free_space == "Enough free space" ]]; then
 
-get_name() {
-    
-}
-
-join_into_string() {
-    local IFS=''
-    echo "$*"
-}
-
-letters=$(echo "abcdefgh" | fold -w1)
-echo $letters
-string=$(shuf -e $letters)
-echo $string
-
-string2=$(join_into_string $string)
-echo $string2
+	path=$1
+	num_folders=$2
+	folder_names=$3
+	create_folders $path $num_folders $folder_names
+	num_files=$4
+	file_names=$5
+	file_size=$6
+	create_files $num_files $file_names $file_size
+else
+	echo "There isn't enough free space left"
+	echo "Should be over 1GB left to run the script"
+fi
