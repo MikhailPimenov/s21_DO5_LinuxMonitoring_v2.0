@@ -1,0 +1,84 @@
+#!/bin/bash
+
+num_to_insert_zeros=9
+function insert_zero(){
+	zero_inserted=$1
+	if [[ $1 -le num_to_insert_zeros ]]; then
+		zero_inserted="0$1"
+	fi
+	echo $zero_inserted
+}
+
+min_year=1970
+max_year=2022
+diff=max_year-min_year
+year=$(( $RANDOM % diff + min_year ))
+
+max_month=12
+month=$(( $RANDOM % max_month  + 1 ))
+leap_year=$(( year % 4 ))
+case $month in
+	1)
+		month_s="Jan"
+		;;
+	2)
+		month_s="Feb"
+		;;
+	3)
+		month_s="Mar"
+		;;
+	4)
+		month_s="Apr"
+		;;
+	5)
+		month_s="May"
+		;;
+	6)
+		month_s="Jun"
+		;;
+	7)
+		month_s="Jul"
+		;;
+	8)
+		month_s="Aug"
+		;;
+	9)
+		month_s="Sep"
+		;;
+	10)
+		month_s="Oct"
+		;;
+	11)
+		month_s="Nov"
+		;;
+	12)
+		month_s="Dec"
+		;;
+esac
+month=$(insert_zero $month)
+month_without_zero=${month#0}
+if [[ $month_without_zero  -eq 1 ]] || [[ $month_without_zero -eq 3 ]] || [[ $month_without_zero -eq 5 ]] || [[ $month_without_zero -eq 7 ]] || [[ $month_without_zero -eq 8 ]] || [[ $month_without_zero -eq 10 ]] || [[ $month_without_zero -eq 12 ]]; then
+	max_day=31
+elif [[ $month_without_zero -eq 4 ]] || [[ $month_without_zero -eq 6 ]] || [[ $month_without_zero -eq 9 ]] || [[ $month_without_zero -eq 11 ]]; then
+	max_day=30
+elif [[ $leap_year -eq 0 ]] && [[ $month_without_zero -eq 2 ]]; then
+	max_day=29
+elif [[ $leap_year -ne 0 ]] && [[ $month_without_zero -eq 2 ]]; then
+	max_day=28
+fi
+
+day=$(( $RANDOM % $max_day + 1 ))
+day=$(insert_zero $day)
+
+# Adjusted $RANDOM divisor so the logs are more spread
+max_hour=24
+hour=$(( $RANDOM % 10))
+
+max_minute=59
+max_start_minute=42
+minute=$(( $RANDOM % $max_start_minute + 1))
+
+max_second=59
+second=$(( $RANDOM % $max_second + 1))
+
+

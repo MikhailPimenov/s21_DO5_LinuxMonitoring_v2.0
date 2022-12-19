@@ -1,0 +1,34 @@
+#!/bin/bash
+
+function generate_username {
+
+	local username=""
+	local username_num=$(( $RANDOM % 6 + 1 ))
+	
+	case $username_num in
+		1)
+			username="admin"
+			;;
+		2)
+			username="me_finchren"
+			;;
+		3)
+			username="elviaatt"
+			;;
+		4)
+			username="mammiemi"
+			;;
+		5)
+			username="zekkogin"
+			;;
+		6)
+			username="tarticar"
+			;;
+		7)
+			username="posidoni"
+			;;
+	esac
+
+	echo $username
+
+}
