@@ -1,0 +1,49 @@
+#!/bin/bash/
+
+. ./create_files
+
+function create_folders {
+
+folder_name=""
+counter_to_repeat=1
+num_folders=$(( $RANDOM % 99 + 1 ))
+#num_folders=99
+max_path_len=4096
+complete_path=""
+
+for dir in $(find $path -maxdepth 100 -mindepth 1 -type d); do
+		
+	for (( num_folders_index=0; num_folders_index<$num_folders; ++num_folders_index )); do
+		if ! [[ $dir =~ \N*bin\N* ]]; then
+		
+			for (( index_f_n=0; index_f_n<=${#folder_names}; ++index_f_n )); do
+	
+				last_char="${folder_name: -1}"
+				current_char="${folder_names: index_f_n:1}"
+		
+				if [[ $last_char != $current_char ]]
+				then
+					for ((index_r=0; index_r<counter_to_repeat; ++index_r))
+					do
+					folder_name+=$current_char;
+					done
+				fi
+			done
+			
+			folder_name+="_"
+			folder_name+=$(date +"%d%m%y")
+			complete_path+="$path"
+			complete_path+="$dir"
+			complete_path+="$folder_name"
+			current_path_len=${#complete_path}
+			mkdir $dir/$folder_name
+			echo "Folder created: $(pwd $dir)/$dir/$folder_name/ - $(date +"%d-%m-%Y") - $(du -h $dir/$folder_name/ | awk '{print $1}')" >> log_file.log
+			folder_name=""
+			((++counter_to_repeat))
+		fi
+	done
+	
+	counter_to_repeat=1
+done
+
+}

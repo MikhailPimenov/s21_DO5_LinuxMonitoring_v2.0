@@ -1,0 +1,53 @@
+#!/bin/bash/
+
+function check_input {
+
+# Check the num of variables
+num_arv=3
+if [ $# -ne $num_arv ]
+then
+	echo "There should be only 3 parameters. No more, no less"
+	# 7 - Argument list is too long code
+	exit 7
+fi
+
+# Check the number of chars for folders
+max_char_folder_name=7
+len_folder_name=${#1}
+if [ $len_folder_name -gt $max_char_folder_name ]
+then
+	echo "Folder name shouldn't be greater than 7 chars"
+	# 36 - File name too long
+	exit 36
+fi
+
+# Check if the folder name is only letters
+folder_name=$1
+if [[ "${folder_name}" =~ [^a-zA-Z] ]]
+then
+	echo "Folder name should contain only letters"
+	exit 1
+fi
+
+# Check the filename
+filename_and_ext=$2
+regex="^[a-zA-Z]{1,7}[.][a-zA-Z]{1,3}$"
+if ! [[ $filename_and_ext =~ $regex ]] 
+then
+	echo "Input of the file should be only like the following: string.exe"
+	echo "First part should be at least 1 char long and no more than 7 chars long"
+	echo "Second part should be at least 1 char long and no more than 3 chars long"
+	exit 1
+fi
+
+# Check the file size
+filesize_with_size_type=$(basename -- "$3")
+filesize="${filesize_with_size_type%M*}"
+if [[ filesize -le 0 ]] || [[ filesize -gt 100 ]]
+then
+	echo "Filesize cannot be zero, negative or greater than 100"
+	exit 1
+fi
+
+}
+
