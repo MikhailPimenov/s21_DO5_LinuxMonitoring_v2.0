@@ -7,25 +7,25 @@ function generate_username {
 	
 	case $username_num in
 		1)
-			username="admin"
+			username="user0a"
 			;;
 		2)
-			username="me_finchren"
+			username="user1b"
 			;;
 		3)
-			username="elviaatt"
+			username="user2c"
 			;;
 		4)
-			username="mammiemi"
+			username="user3d"
 			;;
 		5)
-			username="zekkogin"
+			username="user4e"
 			;;
 		6)
-			username="tarticar"
+			username="user5f"
 			;;
 		7)
-			username="posidoni"
+			username="user6g"
 			;;
 	esac
 

@@ -21,7 +21,7 @@ case $choice in
 		echo "The sorted data is going to be created in the \"$name_of_dir\" directory"
 		mkdir $name_of_dir
 
-		for dir in ../04/*; do
+		for dir in ../04/logs/*; do
 			if [[ $dir =~ $regex ]]; then
 			sort_by_response_code $dir $name_of_dir
 		fi
@@ -34,7 +34,7 @@ case $choice in
 		echo "The lists with the unique IPs are going to get created in the \"$name_of_dir\" directory"
 		mkdir $name_of_dir
 
-		for dir in ../04/*; do
+		for dir in ../04/logs/*; do
 			if [[ $dir =~ $regex ]]; then
 			get_unique_ips $dir $name_of_dir
 		fi
@@ -48,7 +48,7 @@ case $choice in
 		echo "The with errors are going to get created in the \"$name_of_dir\" directory"
 		mkdir $name_of_dir
 
-		for dir in ../04/*; do
+		for dir in ../04/logs/*; do
 			if [[ $dir =~ $regex ]]; then
 			get_errors $dir $name_of_dir
 		fi
@@ -62,7 +62,7 @@ case $choice in
 		echo "The with errors are going to get created in the \"$name_of_dir\" directory"
 		mkdir $name_of_dir
 
-		for dir in ../04/*; do
+		for dir in ../04/logs/*; do
 			if [[ $dir =~ $regex ]]; then
 			get_ips_with_errors $dir $name_of_dir
 		fi
