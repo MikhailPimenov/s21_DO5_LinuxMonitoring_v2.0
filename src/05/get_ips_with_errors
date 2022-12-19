@@ -1,0 +1,17 @@
+#!/bin/bash
+
+. ./get_errors
+
+function get_ips_with_errors {
+
+	local log_file_path=$1
+	local dir=$2
+	get_errors $log_file_path $dir
+	local name_of_file_with_errors=${log_file_path: 6:-4}
+	local name_of_file_with_errors+=".log"
+	local resulting_file_with_err_ips="err_ips_"
+	local resulting_file_with_err_ips+=$name_of_file_with_errors
+	awk -F ' ' '{ print $1 }' $dir/"$name_of_file_with_errors" | sort -nu >> $dir/"$resulting_file_with_err_ips"
+	rm $dir/$name_of_file_with_errors
+
+}
